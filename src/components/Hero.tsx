@@ -6,12 +6,28 @@ import { LanguageToggle } from "./LanguageToggle";
 export const Hero = () => {
   const { t } = useLanguage();
 
+  const handleDownloadCV = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/cv-chukwuma-ugwu.pdf'; // You'll need to add the actual CV file to the public folder
+    link.download = 'Chukwuma_Ugwu_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleViewProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-accent/30 overflow-hidden">
-      {/* Background decoration */}
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-primary/5 overflow-hidden">
+      {/* Enhanced geospatial-themed background */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-tech-teal rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-primary to-tech-teal rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-tech-teal to-primary rounded-full blur-3xl"></div>
+        {/* Grid pattern for mapping theme */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       </div>
       
       {/* Language Toggle */}
@@ -21,9 +37,16 @@ export const Hero = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Profile Image Placeholder */}
-          <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary to-tech-teal flex items-center justify-center shadow-hero">
-            <span className="text-4xl font-bold text-white">CU</span>
+          {/* Enhanced Profile with geospatial elements */}
+          <div className="relative w-32 h-32 mx-auto mb-8">
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-tech-teal flex items-center justify-center shadow-hero relative overflow-hidden">
+              <span className="text-4xl font-bold text-white z-10">CU</span>
+              {/* Subtle mapping overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent"></div>
+            </div>
+            {/* Orbital rings for geodetic theme */}
+            <div className="absolute inset-0 border-2 border-primary/20 rounded-full animate-pulse"></div>
+            <div className="absolute -inset-2 border border-tech-teal/20 rounded-full"></div>
           </div>
 
           {/* Main Content */}
@@ -59,13 +82,20 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Enhanced Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gradient-to-r from-primary to-tech-teal hover:from-primary-hover hover:to-tech-teal text-white shadow-hero px-8 py-3">
+            <Button 
+              onClick={handleDownloadCV}
+              className="bg-gradient-to-r from-primary to-tech-teal hover:from-primary-hover hover:to-tech-teal text-white shadow-hero px-8 py-3 transform hover:scale-105 transition-all duration-300"
+            >
               <Download className="w-5 h-5 mr-2" />
               {t('hero.downloadCV')}
             </Button>
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3">
+            <Button 
+              onClick={handleViewProjects}
+              variant="outline" 
+              className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 transform hover:scale-105 transition-all duration-300"
+            >
               <ExternalLink className="w-5 h-5 mr-2" />
               {t('hero.viewProjects')}
             </Button>
